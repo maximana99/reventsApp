@@ -6,7 +6,7 @@ export default function NavBar({ setFormOpen }) {
     <Menu inverted fixed='top' className='blue'>
       <Container>
         <Menu.Item header>
-          <img src='/assets/logo.png' alt='logo' style={{ marginRight: 15 }} />
+          <img src='/assets/icon.png' alt='logo' style={{ marginRight: 15 }} />
           Re-vents
         </Menu.Item>
         <Menu.Item name='Events' />
@@ -19,6 +19,7 @@ export default function NavBar({ setFormOpen }) {
           />
         </Menu.Item>
         <Menu.Item position='right'>
+          <img src='/assets/log.png' alt='logo' style={{ marginRight: 15 }} />
           <Button basic inverted content='Login' />
           <Button
             basic

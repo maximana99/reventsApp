@@ -1,14 +1,19 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
 import "./app/layout/styles.css";
 import App from "./app/layout/App";
 import reportWebVitals from "./reportWebVitals";
 import "semantic-ui-css/semantic.min.css";
+import { BrowserRouter } from "react-router-dom";
 
 const rootEl = document.getElementById("root");
 
 function render() {
-  createRoot(rootEl).render(<App />);
+  ReactDOM.createRoot(rootEl).render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
 }
 
 if (module.hot) {
