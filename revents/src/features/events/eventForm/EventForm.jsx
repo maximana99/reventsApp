@@ -23,6 +23,7 @@ export default function EventForm() {
   };
 
   const [values, setValues] = useState(initialValues);
+  const [showMessage, setShowMessage] = useState(false);
 
   function handleFormSubmit() {
     selectedEvent
@@ -36,6 +37,10 @@ export default function EventForm() {
             hostPhotoURL: "/assets/user.png",
           })
         );
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 2000);
   }
 
   function handleInputChange(e) {
@@ -110,6 +115,20 @@ export default function EventForm() {
           content='Cancel'
         />
       </Form>
+      {showMessage && (
+        <div
+          style={{
+            backgroundColor: "black",
+            color: "white",
+            padding: "5px",
+            marginTop: "10px",
+            float: "left",
+            fontSize: "12px",
+          }}
+        >
+          Added
+        </div>
+      )}
     </Segment>
   );
 }
