@@ -30,3 +30,14 @@ body {
 .masthead h1.ui.header {
   font-size: 4em;
 }
+
+.custom-input input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: "2px solid";
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
