@@ -10,6 +10,7 @@ import { configureStore } from "./app/store/configureStore";
 import ScrollToTop from "./app/layout/ScrollToTop";
 import "react-toastify/dist/ReactToastify.min.css";
 import { loadEvents } from "./features/events/eventActions";
+import "react-calendar/dist/Calendar.css";
 
 const store = configureStore();
 
