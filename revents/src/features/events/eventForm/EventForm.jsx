@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
-import cuid from "cuid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { createEvent, updateEvent } from "../eventActions";
+import { listenToEvents } from "../eventActions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -12,6 +11,14 @@ import MyTextArea from "../../../app/common/form/MyTextArea";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import { categoryData } from "../../../app/api/categoryOptions";
 import MyDateInput from "../../../app/common/form/MyDateInput";
+import {
+  addEventToFirestore,
+  listenToEventFromFirestore,
+  updateEventInFirestore,
+} from "../../../app/firestore/firestoreService";
+import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { toast } from "react-toastify";
 
 export default function EventForm() {
   const dispatch = useDispatch();
@@ -19,6 +26,7 @@ export default function EventForm() {
   const selectedEvent = useSelector((state) =>
     state.event.events.find((e) => e.id === id)
   );
+  const { loading, error } = useSelector((state) => state.async);
 
   const initialValues = selectedEvent ?? {
     title: "",
@@ -38,29 +46,41 @@ export default function EventForm() {
     date: Yup.string().required(),
   });
 
+  useFirestoreDoc({
+    shouldExecute: !!id,
+    query: () => listenToEventFromFirestore(id),
+    data: (event) => dispatch(listenToEvents([event])),
+    deps: [id, dispatch],
+  });
+
+  const navigate = useNavigate();
   const [showMessage, setShowMessage] = useState(false);
+
+  if (loading) return <LoadingComponent content='Loading event...' />;
+
+  if (error) {
+    navigate("/error");
+  }
 
   return (
     <Segment clearing>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          selectedEvent
-            ? dispatch(updateEvent({ ...selectedEvent, ...values }))
-            : dispatch(
-                createEvent({
-                  ...values,
-                  id: cuid(),
-                  hostedBy: "Bob",
-                  attendees: [],
-                  hostPhotoURL: "/assets/user.png",
-                })
-              );
-          setShowMessage(true);
-          setTimeout(() => {
-            setShowMessage(false);
-          }, 2000);
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            selectedEvent
+              ? await updateEventInFirestore(values)
+              : await addEventToFirestore(values);
+            setShowMessage(true);
+            setTimeout(() => {
+              setShowMessage(false);
+            }, 2000);
+            setSubmitting(false);
+          } catch (error) {
+            toast.error(error.message);
+            setSubmitting(false);
+          }
         }}
       >
         {({ isSubmitting, dirty, isValid }) => (
