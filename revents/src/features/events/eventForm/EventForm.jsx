@@ -13,6 +13,7 @@ import { categoryData } from "../../../app/api/categoryOptions";
 import MyDateInput from "../../../app/common/form/MyDateInput";
 import {
   addEventToFirestore,
+  cancelEventToggle,
   listenToEventFromFirestore,
   updateEventInFirestore,
 } from "../../../app/firestore/firestoreService";
@@ -104,6 +105,19 @@ export default function EventForm() {
               timeCaption='time'
               dateFormat='MMMM d, yyyy h:mm a'
             />
+            {selectedEvent && (
+              <Button
+                type='button'
+                floated='left'
+                color={selectedEvent.isCancelled ? "green" : "red"}
+                content={
+                  selectedEvent.isCancelled
+                    ? "Reactivate event"
+                    : "Cancel Event"
+                }
+                onClick={() => cancelEventToggle(selectedEvent)}
+              />
+            )}
 
             <Button
               disabled={!isValid || !dirty || isSubmitting}
