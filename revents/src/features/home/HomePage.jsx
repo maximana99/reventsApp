@@ -35,7 +35,7 @@ export default function HomePage({ history }) {
             color='blue'
             style={{ marginBottom: 18 }}
           />
-          Re-vents
+          Connect of Events
         </Header>
         <Button as={Link} to='/events' size='huge' inverted color='black'>
           Get started

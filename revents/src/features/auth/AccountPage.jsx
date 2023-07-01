@@ -3,31 +3,35 @@ import { Button, Form, Header, Label, Segment } from "semantic-ui-react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../app/common/form/MyTextInput";
-// import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { updateUserPassword } from "../../app/firestore/firebaseService";
 
 export default function AccountPage() {
   const { currentUser } = useSelector((state) => state.auth);
+
   return (
     <Segment clearing>
-      <Header dividing size='large' content='Account' />
+      <Header dividing size='large' content='Cont' />
       {currentUser.providerId === "password" && (
         <>
-          <Header color='teal' sub content='Change Password' />
+          <Header color='teal' sub content='Change the password' />
           <p>Use this form to change your password</p>
           <Formik
             initialValues={{ newPassword1: "", newPassword2: "" }}
             validationSchema={Yup.object({
-              newPassword1: Yup.string().required("Password is required"),
-              newPassword2: Yup.string().oneOf(
-                [Yup.ref("newPassword1"), null],
-                "Passwords do not match"
-              ),
+              newPassword1: Yup.string()
+                .required("Password is required")
+                .min(6, "Password must contain at least 6 characters"),
+              newPassword2: Yup.string()
+                .oneOf(
+                  [Yup.ref("newPassword1"), null],
+                  "Passwords do not match"
+                )
+                .required("Password confirmation is mandatory"),
             })}
             onSubmit={async (values, { setSubmitting, setErrors }) => {
               try {
-                await updateUserPassword(values);
+                await updateUserPassword(values.newPassword1);
               } catch (error) {
                 setErrors({ auth: error.message });
               } finally {
@@ -40,12 +44,12 @@ export default function AccountPage() {
                 <MyTextInput
                   name='newPassword1'
                   type='password'
-                  placeholder='New Password'
+                  placeholder='Parolă Nouă'
                 />
                 <MyTextInput
                   name='newPassword2'
                   type='password'
-                  placeholder='Confirm Password'
+                  placeholder='Confirmă Parola'
                 />
                 {errors.auth && (
                   <Label
@@ -62,7 +66,7 @@ export default function AccountPage() {
                   loading={isSubmitting}
                   size='large'
                   positive
-                  content='Update password'
+                  content='Actualizează Parola'
                 />
               </Form>
             )}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Button, Grid, Icon } from "semantic-ui-react";
+import { Segment, Grid, Icon } from "semantic-ui-react";
 import { format } from "date-fns";
 
 export default function EventDetailedInfo({ event }) {
@@ -33,9 +33,7 @@ export default function EventDetailedInfo({ event }) {
           <Grid.Column width={11}>
             <span>{event.venue}</span>
           </Grid.Column>
-          <Grid.Column width={4}>
-            <Button color='teal' size='tiny' content='Show Map' />
-          </Grid.Column>
+          <Grid.Column width={4}></Grid.Column>
         </Grid>
       </Segment>
     </Segment.Group>

@@ -13,7 +13,7 @@ export default function RegisterForm() {
   const dispatch = useDispatch();
 
   return (
-    <ModalWrapper size='mini' header='Register to Re-vents'>
+    <ModalWrapper size='mini' header='Register to Connect of Events'>
       <Formik
         initialValues={{ displayName: "", email: "", password: "" }}
         validationSchema={Yup.object({

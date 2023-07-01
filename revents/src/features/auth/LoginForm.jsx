@@ -13,7 +13,7 @@ export default function LoginForm() {
   const dispatch = useDispatch();
 
   return (
-    <ModalWrapper size='mini' header='Sign in to Re-vents'>
+    <ModalWrapper size='mini' header='Sign in to Connect of Events'>
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({

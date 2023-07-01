@@ -19,11 +19,13 @@ export default function EventDetailedChat() {
           <Comment>
             <Comment.Avatar src='/assets/user.png' />
             <Comment.Content>
-              <Comment.Author as='a'>Matt</Comment.Author>
+              <Comment.Author as='a'>Maria</Comment.Author>
               <Comment.Metadata>
                 <div>Today at 5:42PM</div>
               </Comment.Metadata>
-              <Comment.Text>How artistic!</Comment.Text>
+              <Comment.Text>
+                Does anyone know more about the host of the event
+              </Comment.Text>
               <Comment.Actions>
                 <Comment.Action>Reply</Comment.Action>
               </Comment.Actions>
@@ -33,14 +35,12 @@ export default function EventDetailedChat() {
           <Comment>
             <Comment.Avatar src='/assets/user.png' />
             <Comment.Content>
-              <Comment.Author as='a'>Elliot Fu</Comment.Author>
+              <Comment.Author as='a'>Bob John</Comment.Author>
               <Comment.Metadata>
                 <div>Yesterday at 12:30AM</div>
               </Comment.Metadata>
               <Comment.Text>
-                <p>
-                  This has been very useful for my research. Thanks as well!
-                </p>
+                <p>I know him, he's very talented, it's worth going</p>
               </Comment.Text>
               <Comment.Actions>
                 <Comment.Action>Reply</Comment.Action>
@@ -50,11 +50,11 @@ export default function EventDetailedChat() {
               <Comment>
                 <Comment.Avatar src='/assets/user.png' />
                 <Comment.Content>
-                  <Comment.Author as='a'>Jenny Hess</Comment.Author>
+                  <Comment.Author as='a'>Maria</Comment.Author>
                   <Comment.Metadata>
                     <div>Just now</div>
                   </Comment.Metadata>
-                  <Comment.Text>Elliot you are always so right</Comment.Text>
+                  <Comment.Text>Thanks for the info</Comment.Text>
                   <Comment.Actions>
                     <Comment.Action>Reply</Comment.Action>
                   </Comment.Actions>
@@ -66,11 +66,11 @@ export default function EventDetailedChat() {
           <Comment>
             <Comment.Avatar src='/assets/user.png' />
             <Comment.Content>
-              <Comment.Author as='a'>Joe Henderson</Comment.Author>
+              <Comment.Author as='a'>Pop Julia</Comment.Author>
               <Comment.Metadata>
                 <div>5 days ago</div>
               </Comment.Metadata>
-              <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
+              <Comment.Text>This is awesome. Thanks so much</Comment.Text>
               <Comment.Actions>
                 <Comment.Action>Reply</Comment.Action>
               </Comment.Actions>
