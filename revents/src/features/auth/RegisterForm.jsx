@@ -36,7 +36,7 @@ export default function RegisterForm() {
           <Form className='ui form'>
             <MyTextInput
               name='displayName'
-              placeholder='DisplayName'
+              placeholder='Full Name'
               style={{
                 width: "300px",
               }}
